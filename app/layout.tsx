@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";
+import { Suspense } from "react";
+import Providers from "./providers"; // si tu as un SessionProvider ici, garde-le
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "StudyHub",
-  description: "Tout pour réviser, au même endroit.",
+  description: "Votre console d’apprentissage",
 };
 
 export default function RootLayout({
@@ -24,7 +25,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        {/* si tu as un SessionProvider/ThemeProvider, garde-le ici */}
+        <Providers>
+          {/* Pare-feu global contre useSearchParams non suspense-isé */}
+          <Suspense fallback={null}>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );
