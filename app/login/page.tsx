@@ -1,17 +1,14 @@
 // app/login/page.tsx
+import { Suspense } from "react";
 import LoginForm from "./ui/LoginForm";
 
-export const metadata = {
-  title: "Connexion – StudyHub",
-};
-
-export const dynamic = "force-dynamic"; // évite le prerender/SSG sur la page de login
+export const metadata = { title: "Connexion – StudyHub" };
+// Empêche la tentative de prerender
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type Props = {
-  searchParams?: {
-    callbackUrl?: string;
-    error?: string;
-  };
+  searchParams?: { callbackUrl?: string; error?: string };
 };
 
 export default function LoginPage({ searchParams }: Props) {
@@ -20,7 +17,6 @@ export default function LoginPage({ searchParams }: Props) {
 
   return (
     <div className="min-h-screen relative">
-      {/* fond / overlay, identique à l’accueil pour la cohérence visuelle */}
       <div className="absolute inset-0 -z-10">
         <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover" poster="/bg/console.jpg">
           <source src="/bg/background.webm" type="video/webm" />
@@ -37,7 +33,10 @@ export default function LoginPage({ searchParams }: Props) {
       </div>
 
       <div className="relative z-10 grid place-items-center min-h-[70vh] px-4">
-        <LoginForm callbackUrl={callbackUrl} error={error} />
+        {/* Barrière Suspense */}
+        <Suspense fallback={null}>
+          <LoginForm callbackUrl={callbackUrl} error={error} />
+        </Suspense>
       </div>
     </div>
   );
