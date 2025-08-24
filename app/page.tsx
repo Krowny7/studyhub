@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion"; // ✅ AJOUTER CETTE LIGNE
+import { motion } from "framer-motion";
 import {
   CalendarDays,
   CheckCircle2,
@@ -17,7 +17,6 @@ import {
   Brain,
   ListChecks,
 } from "lucide-react";
-
 
 // Accueil sans header - avec ligne de titre + statut + heure et chat dock
 
@@ -150,7 +149,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <p className="mt-10 text-xs text-gray-400">Astuce : Tab pour naviguer, Entrée pour activer - les liens sont inactifs pour le moment.</p>
+        <p className="mt-10 text-xs text-gray-400">Astuce : Tab pour naviguer, Entrée pour activer - les liens sont inactifs pour le moment.</p>
       </section>
 
       {/* Chat dock */}
