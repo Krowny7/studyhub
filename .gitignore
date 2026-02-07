@@ -25,3 +25,9 @@ Thumbs.db
 
 # misc
 coverage/
+
+.env.local
+.env
+.next
+node_modules
+
