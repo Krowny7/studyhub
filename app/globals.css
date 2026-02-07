@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+
+    /* Brand accents (RGB triplets) */
+    --accent: 59 130 246; /* blue-500 */
+    --accent2: 16 185 129; /* emerald-500 */
+    --violet: 168 85 247; /* violet-500 */
+
+    /* Layout */
+    --bottom-nav-height: 64px;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Subtle, consistent app background */
+    background-color: rgb(10 10 10);
+    background-image:
+      radial-gradient(1200px circle at 0% 0%, rgba(var(--accent) / 0.18), transparent 60%),
+      radial-gradient(900px circle at 100% 0%, rgba(var(--violet) / 0.14), transparent 55%),
+      radial-gradient(1000px circle at 50% 110%, rgba(var(--accent2) / 0.10), transparent 62%),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03), transparent 35%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Better default focus ring for keyboard users */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+  }
+
+  /* Smoother <details> UX */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  /* Surfaces */
+  .card {
+    @apply rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] shadow-[0_10px_35px_rgba(0,0,0,0.35)] backdrop-blur;
+  }
+
+  .card-hover {
+    @apply transition hover:bg-white/[0.06];
+  }
+
+  .card-soft {
+    @apply rounded-2xl border border-white/10 bg-white/[0.025];
+  }
+
+  /* Buttons */
+  .btn {
+    /* Mobile: make touch targets easier to hit */
+    @apply inline-flex min-h-[44px] touch-manipulation items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-400 shadow-[0_12px_22px_rgba(59,130,246,0.22)];
+  }
+
+  .btn-secondary {
+    @apply border border-white/10 bg-white/[0.04] hover:bg-white/[0.07];
+  }
+
+  .btn-ghost {
+    @apply border border-transparent hover:bg-white/[0.06];
+  }
+
+  .btn-danger {
+    @apply border border-red-500/30 bg-red-500/10 text-red-100 hover:bg-red-500/15;
+  }
+
+  /* Inputs */
+  .input {
+    /*
+      iOS Safari zooms into form fields when font-size < 16px.
+      Use 16px on small screens, keep the tighter 14px on >=sm.
+    */
+    @apply w-full min-h-[44px] touch-manipulation rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-[16px] sm:text-sm text-white placeholder:text-white/40 outline-none transition;
+  }
+
+  .input:focus {
+    @apply border-white/20 bg-white/[0.05];
+  }
+
+  .select {
+    @apply w-full min-h-[44px] touch-manipulation rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-[16px] sm:text-sm text-white outline-none transition;
+  }
+
+  .select:focus {
+    @apply border-white/20 bg-white/[0.05];
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium;
+  }
+
+  .badge-private {
+    @apply border-white/15 bg-white/5 text-white/80;
+  }
+
+  /* Alias used across the app */
+  .badge-shared,
+  .badge-group {
+    @apply border-blue-400/25 bg-blue-400/10 text-blue-100;
+  }
+
+  .badge-public {
+    @apply border-emerald-400/25 bg-emerald-400/10 text-emerald-100;
+  }
+
+  .badge-neutral {
+    @apply border-white/10 bg-white/[0.02] text-white/70;
+  }
+
+  /* Chips (segmented controls) */
+  .chip {
+    @apply inline-flex min-h-[44px] touch-manipulation items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm transition hover:bg-white/[0.06];
+  }
+
+  .chip-active {
+    @apply bg-white/[0.10] border-white/15;
+  }
+}
+
+.dark {
+  color-scheme: dark;
+}
